@@ -1,4 +1,4 @@
-import os
+import sys
 from stats import count_words, count_characters, sorted_characters
 
 def get_book_text(path) -> str:
@@ -17,7 +17,11 @@ def print_report(path: str, num_words: int, sorted_chars: list) -> None:
     print("=" * 13 + " END " + "=" * 15)
 
 def main() -> None:
-    path = os.path.join("books", "frankenstein.txt")
+    # path = os.path.join("books", "frankenstein.txt")
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    path = sys.argv[1]
     book_contents: str = get_book_text(path)
     num_words: int = count_words(book_contents)
     num_characters: dict = count_characters(book_contents)
